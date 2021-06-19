@@ -1,0 +1,17 @@
+name: kick-lambda
+
+on:
+  workflow_dispatch:
+
+jobs:
+  invoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: invoke lambda
+        run: |
+          aws lambda invoke --function-name kick-private-api out
+          echo 'ok, output is:'
+          cat out
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
